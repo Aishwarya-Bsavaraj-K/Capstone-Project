@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Hello User</h1>
+            
+            
+        </div>
+        
+    </div>
+      {% if request.args.get('msg') %}
+  <ul class="messages">
+   
+      <li class="alert alert-info">{{ request.args.get('msg') }}</li>
+    
+  </ul>
+{% endif %}
+            <div class="login-box-body">
+              <p class="login-box-msg">Sign in to start your session</p>
+              <div class="form-group">
+                <form action="{{url_for('upload_file')}}"  method="POST" name=""  data-toggle="validator" enctype="multipart/form-data">
+                 <div class="form-group has-feedback"> <!----- username -------------->
+                    <label>Upload file to cloud
+                      <input class="form-control" name="file"  id="fileid" type="file"  />
+                    </label>
+                  </div>
+            
+                  <div class="row">
+                      
+                      <div class="col-xs-12">
+                          <button type="submit" class="btn btn-green btn-block btn-flat" >Upload</button>
+                      </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+<h4>Here are the requests</h4>
+
+<table class="table">
+    <tr>
+        {% for column in table.__table__.columns.keys() %}
+        <th>{{column}}</th>
+        {% endfor %}
+    </tr>
+    {% for audit_request in audit_requests %}
+    <tr>
+        {% for column in table.__table__.columns.keys() %}
+        <td>{{getattr(audit_request,column)}}</td>
+        {% endfor %}
+        {% if(not audit_request.resolved) %}
+</div>
+        <td><a href='/verify/?data={{getattr(audit_request,"fileName")}}'><div class="btn btn-default verify-btn" >verify</div></a></td>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+
+                
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+$(document).ready(function(){
+    var verify_file = function(e){
+        var target = e.originalEvent.target;
+
+        var url = '/verify/';
+
+        $.get(url,data={'data':$(target).attr('data')},function(d){
+            alert('stats:'+d.status);
+            // var cols = $(target).parent().siblings();
+            // if (d.status){
+            //     cols[5].innerHTML = "True";
+            //     cols[6].innerHTML = "True"
+            // }
+            // else{
+            //     cols[5].innerHTML = "False";
+            //     cols[6].innerHTML = "True";
+            // }
+
+
+        });
+
+        // $(target).fadeOut(100);
+
+    };
+    $('.verify-btn').on('click',verify_file);
+    
+});
+</script>
+{% endblock %}

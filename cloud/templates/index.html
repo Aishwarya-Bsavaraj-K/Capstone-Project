@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+<link rel="icon" type="image/ico" href="favicon.ico" />
+<!--Google web fonts-->
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+<!-- main css -->
+<link rel="stylesheet" type='text/css' href="{{url_for('static',filename='css/main.css')}}" media="screen"/>
+
+<!-- main css -->
+<link rel="stylesheet" type='text/css' href="{{url_for('static',filename='css/style.css')}}" media="screen"/>
+
+<!--page title-->
+<title>Cloud Service</title>
+</head>
+<body>
+<!--Pre loader start-->
+<div id="preloader">
+  <div id="status"><img src="{{url_for('static',filename='images/loader.gif')}}" id="preloader_image" width="36" height="36" alt="loading image"/></div>
+</div>
+
+<!--header start-->
+<header id="hs_header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <div id="hs_logo" > <a href="index-2.html">  </a> </div>
+          <!-- #logo --> 
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <button type="button" class="hs_nav_toggle navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Menu<i class="fa fa-bars"></i></button>
+          <nav>
+            <ul class="hs_menu collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <li><a class="active">Home</a>
+              </li>
+			  <li></li>
+              
+                <li><a href="#" data-target="#login" data-toggle="modal">Login</a>
+              </li>
+              
+             
+			  <li></li>
+              <li></li>
+            </ul>
+          </nav>
+        </div>
+          <div>
+              
+      </div>
+      <!-- .col-md-12 --> 
+    </div>
+    <!-- .row --> 
+  </div>
+  <!-- .container --> 
+  
+</header>
+<!--header end--> 
+<!--slider start-->
+<div id="carousel-example-generic" class="carousel slide carousel-fade" data-ride="carousel"> 
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+  </ol>
+  
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner">
+    <div class="item active"> <img class="animated fadeInDown" src="{{url_for('static',filename='images/client 1.jpg')}}" alt="...">
+      <div class="carousel-caption">
+        <h1 class="hs_slider_title animated bounceInDown">Welcome to Cloud Service</h1>
+        <p class="lead animated pulse">Get best Cloud Service at low cost.</p>
+         </div>
+    </div>
+    <div class="item"> <img class="animated fadeInDown" src="{{url_for('static',filename='images/client 2.jpg')}}" alt="...">
+      <div class="carousel-caption">
+        
+        </div>
+    </div>
+	
+	 
+  </div>
+</div>
+<!--layer slider ends--> 
+
+<!--slider end-->
+{% if request.args.get('msg'): %}
+<div class="alert alert-danger">
+  {{request.args.get('msg')}}
+</div>
+{% endif %}
+
+  <div class="row" style="padding-left:10px"> 
+    <!--what we do start-->
+       
+
+ <div class="hs_margin_40"></div>
+  
+  <!--Our Doctor Team start-->
+
+
+    
+  <div class="clearfix"></div>
+ 
+  <div class="hs_margin_60"></div>
+</div>
+<footer id="hs_footer">
+  <div class="container">
+    <div class="hs_footer_content">
+      <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <div class="row">
+            <div class="hs_footer_about_us">
+              
+                <div class="hs_margin_60"></div>
+                 <div class="row">
+            <div class="col-lg-4 col-md-3 col-sm-12">
+              <h4 class="hs_heading">Get in touch !</h4>
+              <div class="hs_contact_detail">
+                <p><i class="fa fa-map-marker"></i> Cloud Service, Bangaluru, Karnataka 520001</p>
+                <p><i class="fa fa-mobile-phone"></i>0836 222222</p>
+                <div class="clearfix"></div>
+            
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+    <div class="modal fade" id="login" role="dialog">
+      <div class="modal-dialog modal-sm">
+
+        <!-- Modal content no 1-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title text-center form-title">Login</h4>
+          </div>
+          <div class="modal-body padtrbl">
+
+            <div class="login-box-body">
+              <p class="login-box-msg">Sign in to start your session</p>
+              <div class="form-group">
+                <form action="{{url_for('admin_login')}}"  method="POST" name="" id="loginForm" data-toggle="validator">
+                 <div class="form-group has-feedback"> <!----- username -------------->
+                      <input class="form-control" name="username" placeholder="Username"  id="loginid" type="text" autocomplete="off" />
+            <span style="display:none;font-weight:bold; position:absolute;color: red;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginid"></span><!---Alredy exists  ! -->
+                      <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                  </div>
+                  <div class="form-group has-feedback"><!----- password -------------->
+                      <input name='password' class="form-control" placeholder="Password" id="loginpsw" type="password" autocomplete="off" />
+            <span style="display:none;font-weight:bold; position:absolute;color: grey;position: absolute;padding:4px;font-size: 11px;background-color:rgba(128, 128, 128, 0.26);z-index: 17;  right: 27px; top: 5px;" id="span_loginpsw"></span><!---Alredy exists  ! -->
+                      <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                  </div>
+                  <div class="row">
+                      
+                      <div class="col-xs-12">
+                          <button type="submit" class="btn btn-green btn-block btn-flat" >Sign In</button>
+                      </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!--/ Modal box-->
+
+
+<div class="hs_copyright"> Copyright © 2022 Cloud Service All Rights Reserved </div>
+<!--main js file start--> 
+<script type="text/javascript" src="{{url_for('static',filename='js/jquery-1.11.0.min.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/owl.carousel.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/jquery.bxslider.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/jquery.mixitup.min.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/smoothscroll.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/single-0.1.0.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/custom.js')}}"></script> 
+<script type="text/javascript" src="{{url_for('static',filename='js/validator.min.js')}}"></script> 
+<!--main js file end-->
+</body>
+
+</html>

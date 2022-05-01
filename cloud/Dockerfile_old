@@ -1,0 +1,18 @@
+
+from debian:latest
+
+WORKDIR /app
+
+COPY . /app
+
+RUN apt-get install python3 python3-dev py3-pip
+RUN apt-get install  --virtual .build-deps gcc musl-dev libxslt-devel libffi-devel openssl-devel \
+    && pip3 install --no-cache-dir -r requirements.txt 
+
+RUN cd heartbeat/ && python3 setup.py install
+
+EXPOSE 5000
+
+ENTRYPOINT ["python3"]
+CMD ["views.py"]
+

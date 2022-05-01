@@ -1,0 +1,140 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Hello Admin</h1>
+            <h4>Book a service</h4>
+            <form action="{{ url_for('service_register')}}" method='POST' data-toggle="validator">
+
+            <div class="form-group">
+                                        <label for="name">Name</label>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="" data-error="Name cannot be empty" required>
+                                        <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" placeholder="">
+                                        <div class="help-block with-errors"></div>
+
+                                    </div>
+ <div class="form-group">
+                                        <label for="address">Phone</label>
+                                        <input type="tel" class="form-control" id="phone" pattern="(7|8|9)\d{9}" name="phone" placeholder="" data-error="Phone number must have 10 digits starting with 7 or 8 or 9">
+                                        <div class="help-block with-errors"></div>
+
+                                    </div>
+
+           
+            	<div class="form-group">
+            		<label for="job">Vehicle Type</label>
+            		<select class="category fire" name="vehicle" id="vehicle">
+            			<option value="2" selected>2-wheeler</option>
+            			<option value="3">3-wheeler</option>
+            			<option value="4">Car</option>
+
+            		</select>
+            	</div>
+
+                <div class="form-group">
+                                     <label class="radio-inline"><input class='fire' type="radio" name="oiling" value='1' checked>Oil</label>
+                                    <label class="radio-inline"><input class='fire' type="radio" name="oiling" value='0'>Dont Oil</label>
+                                  </div>
+
+                <div class="form-group">
+                                     <label class="radio-inline"><input class='fire' type="radio" name="washing" value='1' checked>Wash</label>
+                                    <label class="radio-inline"><input class='fire' type="radio" name="washing" value='0'>Dont wash</label>
+                                  </div>
+
+                <div class="form-group">
+                                     <label class="radio-inline "><input type="radio" name="wheel" value='1' class='fire' checked>Wheel align</label>
+                                    <label class="radio-inline"><input type="radio" name="wheel" value='0' class='fire'>Dont Wheel Align</label>
+                                  </div>
+
+                <div class="form-group">
+                                     <label class="radio-inline"><input type="radio" name="paint" value='1' class='fire' checked>Paint</label>
+                                    <label class="radio-inline"><input type="radio" name="paint" value='0' class='fire'>Dont Paint</label>
+                                  </div>
+
+
+
+
+
+            	<div class="form-group">
+                <div class="row">
+                <div class="col-md-4">
+            		<button type="submit" class="btn btn-success">
+            			Submit
+            		</button>
+                </div>
+                <div class="col-md-4">
+                    <p id='amount'></p>
+                </div>
+                </div>
+            	</div>
+            </form>
+            
+        </div>
+        
+    </div>
+      {% if msg %}
+  <ul class="messages">
+   
+      <li class="alert alert-info">{{ msg }}</li>
+    
+  </ul>
+{% endif %}
+
+</div>
+
+
+                
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+        var rates;
+
+    $(function(){
+        var amountBox = $('#amount');
+        var name;
+        var amount=0;
+        var finalAmount = 0;
+        var vehicle = 2;
+        $.get('{{url_for("rate")}}',function(d){rates=d;
+
+                $.each(rates,function(k,v){
+          //  alert(k);
+            amount += v;
+        });
+                amountBox.text(amount*vehicle);
+        });
+
+        // alert(amount);
+        $('.fire').change(function(){
+            var name = $(this).attr('name');
+            var value = $(this).val();
+            // vehicle = value;
+            if(name==='vehicle'){
+                vehicle =value;
+                amountBox.text(vehicle * amount);
+            }
+            else{
+                
+                if (value == 1){
+                    amount += rates[name];
+                }
+                else{
+                    amount -= rates[name];
+                }
+                amountBox.text(vehicle*amount);
+            }
+            
+        })
+        
+    });
+</script>
+{% endblock %}

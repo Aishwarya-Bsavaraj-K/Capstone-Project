@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en" heigth = "100%">
+<head>
+<link rel="shortcut icon" type="image/ico" href="favicon.ico" />
+<link rel="icon" type="image/ico" href="favicon.ico" />
+<!--Google web fonts-->
+<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+<!-- main css -->
+<link rel="stylesheet" type='text/css' href="/static/css/main.css" media="screen"/>
+
+<!-- main css -->
+<link rel="stylesheet" type='text/css' href="/static/css/style.css" media="screen"/>
+
+<!--page title-->
+<title>Client</title>
+</head>
+<body>
+<!--Pre loader start-->
+<div id="preloader">
+  <div id="status"><img src="/static/images/loader.gif" id="preloader_image" width="36" height="36" alt="loading image"/></div>
+</div>
+
+<!--header start-->
+<header id="hs_header">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-12">
+          <div id="hs_logo" > <a href="index-2.html">  </a> </div>
+          <!-- #logo --> 
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12">
+          <button type="button" class="hs_nav_toggle navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">Menu<i class="fa fa-bars"></i></button>
+          <nav>
+            <ul class="hs_menu collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <li><a  href="">Home</a>
+              </li>
+
+            <li><a  href="">Bookings</a>
+              </li>
+             
+              
+                <li><a  href="{{url_for('admin_logout')}}">Logout</a>
+              </li>
+              
+
+            </ul>
+          </nav>
+        </div>
+          <div>
+              
+      </div>
+      <!-- .col-md-12 --> 
+    </div>
+    <!-- .row --> 
+  </div>
+  <!-- .container --> 
+  
+</header>
+
+    {% block content %}{% endblock %}
+    <div id="footer">
+        {% block footer %}
+        <div class="hs_copyright"> Copyright © 2022 Tpa- Aishwarya All Rights Reserved </div>
+        {% endblock %}
+    </div>
+      {% block scripts %}
+<script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script> 
+<script type="text/javascript" src="/static/js/bootstrap.js"></script> 
+<script type="text/javascript" src="/static/js/owl.carousel.js"></script> 
+<script type="text/javascript" src="/static/js/jquery.bxslider.js"></script> 
+<script type="text/javascript" src="/static/js/jquery.mixitup.min.js"></script> 
+<script type="text/javascript" src="/static/js/smoothscroll.js"></script> 
+<script type="text/javascript" src="/static/js/single-0.1.0.js"></script> 
+<script type="text/javascript" src="/static/js/custom.js"></script> 
+<script type="text/javascript" src="/static/js/validator.min.js"></script> 
+
+
+  {% endblock %}
+</body>
+</html>

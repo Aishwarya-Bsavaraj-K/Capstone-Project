@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <h1>Hello Admin</h1>
+            <h4>Here are the requests</h4>
+            
+        </div>
+        
+    </div>
+      {% if msg %}
+  <ul class="messages">
+   
+      <li class="alert alert-info">{{ msg }}</li>
+    
+  </ul>
+{% endif %}
+
+<table  class="table">
+    <tr style = width:100%>
+        {% for column in table.__table__.columns.keys() %}
+        <th style = width:100%>{{column}}</th>
+        {% endfor %}
+    </tr>
+    {% for audit_request in audit_requests %}
+    <tr style = width:100%>
+        {% for column in table.__table__.columns.keys() %}
+        <td style = width:100%>{{getattr(audit_request,column)}}</td>
+        {% endfor %}
+        {% if(not audit_request.resolved) %}
+        
+        <td style = width:100%> 
+          <div class="btn btn-default verify-btn" data='{{getattr(audit_request,"user_id")}},{{getattr(audit_request,"id")}},{{getattr(audit_request,"fileName")}}'>verify</div>
+        </td>
+        </div>
+        {% endif %}
+    </tr>
+    {% endfor %}
+</table>
+
+</div>
+
+
+                
+
+{% endblock %}
+{% block scripts %}
+{{super()}}
+<script type="text/javascript">
+$(document).ready(function(){
+    var verify_file = function(e){
+        var target = e.originalEvent.target;
+
+        var url = 'http://192.168.0.178:5555/verify/'+$(target).attr('data');
+
+        $.get(url,function(d){
+            alert('stats:'+d.status);
+            var cols = $(target).parent().siblings();
+            if (d.status){
+                cols[5].innerHTML = "True";
+                cols[6].innerHTML = "True"
+            }
+            else{
+                cols[5].innerHTML = "False";
+                cols[6].innerHTML = "True";
+            }
+
+
+        });
+
+        $(target).fadeOut(100);
+
+    };
+    $('.verify-btn').on('click',verify_file);
+    
+});
+</script>
+{% endblock %}
